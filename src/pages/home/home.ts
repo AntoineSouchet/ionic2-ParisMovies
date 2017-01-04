@@ -3,24 +3,10 @@ import {Geolocation} from 'ionic-native';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, NavParams } from 'ionic-angular';
+import {MapDetails} from '../mapDetails/mapDetails';
+
 declare var google;
 
-@Component({
-  templateUrl: 'mapHome.html'
-})
-
-export class MapXPage {
-  item;
-
-
-   @ViewChild('map') mapElement: ElementRef;
-   map: any;
-
-  constructor(params: NavParams) {
-    this.item = params.data.item;
-
-  }
-}
 
 @Component({
   selector: 'page-home',
@@ -30,9 +16,13 @@ export class HomePage {
   public data;
    public totalNear;
    public listView;
+   rootPage: any = HomePage;
 
 
-   constructor(public navCtrl: NavController,public http: Http) { }
+   constructor(public navCtrl: NavController,public http: Http) {
+     this.navCtrl = navCtrl;
+     
+    }
 
   search() {
     console.log("Launch search");
@@ -82,7 +72,9 @@ export class HomePage {
 }
 
   itemSelected(movie: string) {
-    this.navCtrl.push(MapXPage);
+    this.navCtrl.push(MapDetails, {
+      myMovie: movie
+    });
   }
 
 }
