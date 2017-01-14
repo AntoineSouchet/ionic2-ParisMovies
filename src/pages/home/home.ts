@@ -18,21 +18,17 @@ export class HomePage {
   public data;
   public totalNear;
   public listView;
-  public loadingPopup;
+  //public loadingPopup;
   rootPage: any = HomePage;
 
   constructor(public navCtrl: NavController,public http: Http, public loadingCtrl: LoadingController) { this.navCtrl = navCtrl;
-    this.loadingPopup = this.loadingCtrl.create({
+       }
+
+ public loadingPopup = this.loadingCtrl.create({
       content: 'Please wait...',
       //duration: 3000,
       dismissOnPageChange: false
-    });   }
-
-
-
-  presentLoading() {
-    this.loadingPopup.present();
-  }
+    });
   /*
   * Search function from Button on home.html
   @Params : none
@@ -40,7 +36,7 @@ export class HomePage {
   */
   search() {
     console.log("Launch search");
-    this.presentLoading();
+   this.loadingPopup.present();
     var lat = 0;
     var long = 0;
     //Get current position
@@ -50,6 +46,7 @@ export class HomePage {
     });
 
     this.load().then(data => {
+      this.loadingPopup.dismiss();
       this.data = data.records;
       var totalNear = data.nhits;
         if (totalNear == 0) {
@@ -60,7 +57,7 @@ export class HomePage {
          this.totalNear = "The ten movies near to you."
         }
         
-  this.loadingPopup.dismiss();
+
     });
   }
 
