@@ -1,9 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import {Geolocation} from 'ionic-native';
-import {Http} from '@angular/http';
+import { Geolocation } from 'ionic-native';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, NavParams } from 'ionic-angular';
-import {MapDetails} from '../mapDetails/mapDetails';
+import { MapDetails } from '../mapDetails/mapDetails';
+import { LoadingController } from 'ionic-angular';
 
 declare var google;
 
@@ -13,19 +14,33 @@ declare var google;
   templateUrl: 'home.html'
 })
 export class HomePage {
+  //Public var
   public data;
-   public totalNear;
-   public listView;
-   rootPage: any = HomePage;
+  public totalNear;
+  public listView;
+  public loadingPopup;
+  rootPage: any = HomePage;
+
+  constructor(public navCtrl: NavController,public http: Http, public loadingCtrl: LoadingController) { this.navCtrl = navCtrl;
+    this.loadingPopup = this.loadingCtrl.create({
+      content: 'Please wait...',
+      //duration: 3000,
+      dismissOnPageChange: false
+    });   }
 
 
-   constructor(public navCtrl: NavController,public http: Http) {
-     this.navCtrl = navCtrl;
-     
-    }
 
+  presentLoading() {
+    this.loadingPopup.present();
+  }
+  /*
+  * Search function from Button on home.html
+  @Params : none
+  @Return : Geoposition with GPS phone
+  */
   search() {
     console.log("Launch search");
+    this.presentLoading();
     var lat = 0;
     var long = 0;
     //Get current position
@@ -33,8 +48,8 @@ export class HomePage {
       lat = pos.coords.latitude;
       var long = pos.coords.longitude;
     });
-  this.load()
-    .then(data => {
+
+    this.load().then(data => {
       this.data = data.records;
       var totalNear = data.nhits;
         if (totalNear == 0) {
@@ -42,12 +57,14 @@ export class HomePage {
         } else if (totalNear == 1) {
           this.totalNear = "One film near you.";
         } else {
-         this.totalNear = totalNear + " movies near to you."
+         this.totalNear = "The ten movies near to you."
         }
+        
+  this.loadingPopup.dismiss();
     });
   }
 
-//Load webservice
+  //Load webservice off Paris
   load() {
   if (this.data) {
     // already loaded data
@@ -71,6 +88,7 @@ export class HomePage {
   });
 }
 
+  //Select item into the ListView
   itemSelected(movie: string) {
     this.navCtrl.push(MapDetails, {
       myMovie: movie
