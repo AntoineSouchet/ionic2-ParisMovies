@@ -1,16 +1,27 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Search
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>
+			Search
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-    <ion-label fixed>Movie name</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
-  </ion-list>
+	<ion-card>
+		<ion-card-content>
+			<ion-item>
+				<ion-label stacked>Movie's name</ion-label>
+				<ion-input type="text"></ion-input>
+			</ion-item>
+			<button ion-button full (click)="search()"><ion-icon name="search"></ion-icon>&nbsp;Search movie</button>
+		</ion-card-content>
+	</ion-card>
 </ion-content>
+
+
+<ion-list>
+	<ion-item *ngFor="let movie of data" (click)="itemSelected(movie)">
+		<h2>{{movie.fields.titre}} </h2>
+		<p>{{movie.fields.dist}} meters {{movie.fields.adresse_complete}}</p>
+	</ion-item>
+</ion-list>

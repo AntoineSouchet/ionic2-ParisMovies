@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {Geolocation} from 'ionic-native';
+import { Geolocation } from 'ionic-native';
 
 import { HomePage } from '../home/home';
 import { SearchPage } from '../search/search';
-import { MapPage } from '../map/map';
+import { AboutPage } from '../about/about';
+//import { MapPage } from '../map/map';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class TabsPage {
   // should be each tab's root Page
   tab1Root: any = HomePage;
   tab2Root: any = SearchPage;
-  tab3Root: any = MapPage;
+  tab3Root: any = AboutPage;
 
   constructor() {
 

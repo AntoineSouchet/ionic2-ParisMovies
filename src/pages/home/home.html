@@ -1,31 +1,26 @@
 <ion-header>
-  <ion-navbar class="bar-dark">
-    <ion-title>Paris Movies</ion-title>
-  </ion-navbar>
+	<ion-navbar class="bar-dark">
+		<ion-title>Paris Movies</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      Search movie near your position.
-    </ion-card-header>
-    <ion-card-content>
-      Just click on search button to see results<br /><br />
-      <button ion-button full (click)="search()"><ion-icon name="locate"></ion-icon>&nbsp;Search around me</button><br />
+	<ion-card>
+		<ion-card-header>
+ 			Search movies near your position.
+		</ion-card-header>
+	<ion-card-content>
+		Just click on "search button" to see results.<br /><br />
+		<button ion-button full (click)="search()"><ion-icon name="locate"></ion-icon>&nbsp;Search around me</button><br />
+		{{ totalNear }}
+	</ion-card-content>
+</ion-card>
 
-
-    </ion-card-content>
-  </ion-card>
-      <ion-card>
-        <ion-item>
-          {{ totalNear }}
-        </ion-item>
-      </ion-card>
-  <ion-list>
-    <ion-item *ngFor="let movie of data" (click)="itemSelected(movie)">
-      <h2>{{movie.fields.titre}} </h2>
-      <p>{{movie.fields.dist}} meters {{movie.fields.adresse_complete}}</p>
-    </ion-item>
-  </ion-list>
+	<ion-list>
+ 		<ion-item *ngFor="let movie of data" (click)="itemSelected(movie)">
+		<h2>{{movie.fields.titre}} </h2>
+		<p>{{movie.fields.dist}} meters {{movie.fields.adresse_complete}}</p>
+	</ion-item>
+	</ion-list>
 
 </ion-content>
