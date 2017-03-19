@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Geolocation } from 'ionic-native';
 
 import { HomePage } from '../home/home';
 import { SearchPage } from '../search/search';

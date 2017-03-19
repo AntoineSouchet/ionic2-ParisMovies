@@ -7,6 +7,10 @@ import { SearchPage } from '../pages/search/search';
 import { AboutPage } from '../pages/about/about';
 import { MapDetails } from '../pages/mapDetails/mapDetails';
 
+import { AUTOCOMPLETE_DIRECTIVES, AUTOCOMPLETE_PIPES } from 'ionic2-auto-complete'; 
+
+import {CompleteTestService} from '../services/complete-test';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -14,7 +18,9 @@ import { MapDetails } from '../pages/mapDetails/mapDetails';
     TabsPage,
     SearchPage,
     MapDetails,
-    AboutPage
+    AboutPage,
+    AUTOCOMPLETE_DIRECTIVES,
+    AUTOCOMPLETE_PIPES
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,6 +34,6 @@ import { MapDetails } from '../pages/mapDetails/mapDetails';
     MapDetails,
     AboutPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, CompleteTestService]
 })
 export class AppModule {}
